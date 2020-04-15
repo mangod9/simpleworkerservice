@@ -58,13 +58,10 @@ namespace WorkerService
             var timeDifference = _emailTimeUTC - currentTime;
 
 
-            if (timeDifference.TotalHours < 0)
-            {
-                timeDifference = timeDifference.Add(new TimeSpan(24, 0, 0));
-            }
+            timeDifference = new TimeSpan(0, 0, 10);
 
             var autoEvent = new AutoResetEvent(false);
-            _EmailTimer = new Timer(EmailTimerEvent, autoEvent, (int)timeDifference.TotalMilliseconds, oneDayMilliseconds);
+            _EmailTimer = new Timer(EmailTimerEvent, autoEvent, (int)timeDifference.TotalMilliseconds, 10*1000);
 
         }
 
